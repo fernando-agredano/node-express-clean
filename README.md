@@ -402,3 +402,27 @@ Guarda como `node-ecommerce.postman_collection.json` e impórtalo:
 ```
 
 > Los requests "Create Product" y "Create Order" guardan el `id` automáticamente en variables de colección para los siguientes requests.
+
+---
+
+## Despliegue en Render
+
+Este proyecto está desplegado como un **Web Service** en [Render](https://render.com).
+
+### Pasos para desplegar
+
+1. En el dashboard de Render, crea un nuevo **Web Service** y conecta el repositorio.
+
+2. Configura el servicio:
+
+   | Campo | Valor |
+   |-------|-------|
+   | **Environment** | `Node` |
+   | **Build Command** | `npm install` |
+   | **Start Command** | `npm start` |
+
+3. Render detecta automáticamente Node.js. No se requieren variables de entorno — la base de datos SQLite se crea en el filesystem del contenedor al arrancar.
+
+> Ten en cuenta que Render en el plan gratuito usa un **filesystem efímero**: la base de datos `ecommerce.db` se reinicia con cada nuevo deploy. Para persistencia en producción real se recomienda migrar a una base de datos externa (PostgreSQL, etc.).
+
+4. Una vez desplegado, copia la URL pública (ej. `https://node-express-clean.onrender.com`) y pégala en el panel de ajustes de **API Explorer** para apuntar al entorno de producción.
